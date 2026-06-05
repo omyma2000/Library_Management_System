@@ -4,8 +4,13 @@
  */
 package My_Forms;
 
+import My_Classes.DB;
 import java.awt.Image;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -93,6 +98,7 @@ public class LoginForm extends javax.swing.JFrame {
         jButton_login.setText("login >>");
         jButton_login.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(248, 148, 6), null));
         jButton_login.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_login.addActionListener(this::jButton_loginActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -176,6 +182,53 @@ public class LoginForm extends javax.swing.JFrame {
     private void jPasswordField_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_passActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField_passActionPerformed
+
+    private void jButton_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loginActionPerformed
+        // TODO add your handling code here:
+        //get username , password 
+        String username = jTextField_username.getText();
+        String password = String.valueOf(jPasswordField_pass.getPassword());
+        ResultSet rs;
+        PreparedStatement ps ;
+        
+        String query = "SELECT * FROM `users` WHERE `username` = ? AND `password`=?";
+        //empty check ??
+        if(username.trim().equals("") || password.trim().equals(""))
+        {
+        System.out.println("empty value !!");
+            JOptionPane.showMessageDialog(null, "enter the Username and Password please","Empty fields ",0);
+        }else{
+            try {
+                // get connection from DB class
+                ps= DB.getConnection().prepareStatement(query);
+                ps.setString(1, username);
+                ps.setString(2, password);
+                rs=ps.executeQuery();
+                // check the info was exist  or not 
+                
+                
+                //if exist
+                if(rs.next()){
+                    
+                    System.out.println("yes!!");
+                    // to display dahboard 
+                    DashboardForm dashboardForm = new DashboardForm();
+                    dashboardForm.setVisible(true);
+                    // close log_in form 
+                    this.dispose();
+                } // if not 
+                else{
+                System.out.println("no!!");
+                 JOptionPane.showMessageDialog(null, " the Username or Password is wrong","wrong Data ",0);
+       
+                }
+                
+            } catch (SQLException ex) {
+                System.getLogger(LoginForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        
+        }
+    }//GEN-LAST:event_jButton_loginActionPerformed
 
     /**
      * @param args the command line arguments

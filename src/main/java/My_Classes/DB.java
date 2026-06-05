@@ -5,6 +5,9 @@
 package My_Classes;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -18,6 +21,8 @@ public class DB {
     private static String dbName= "java_library_system";
     private static Integer portNumber = 3306 ;
     private static String pass =""; // no password
+    
+    
     // function to (create & retrun ) connection .
     public static Connection getConnection (){
        Connection connection = null;
@@ -27,6 +32,15 @@ public class DB {
        dataSource.setDatabaseName(dbName);
        dataSource.setPortNumber(portNumber);
        dataSource.setPassword(pass);
+        try {
+            // to found connection 
+            connection=dataSource.getConnection();
+        } catch (SQLException ex) {
+            // to print the error 
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE,null,ex);
+        
+        }
+       
        return connection;
     }
     }
