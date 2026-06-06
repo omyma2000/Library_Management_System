@@ -1,15 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package My_Forms;
+
+
+
 
 import My_Classes.Genre;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author omayma
@@ -35,18 +37,16 @@ public class ManageGenresForm extends javax.swing.JFrame {
         //display image 
         My_Classes.Function_Class func = new My_Classes.Function_Class();
         func.displayImage(75, 60, "/My_Images/clker-free-vector-images-hierarchy-35795_1280.png", jLabel1);
-        // customize table 
-        jTable1.setSelectionBackground(new Color(249,105,14));
-        jTable1.setSelectionForeground(Color.white);
-        jTable1.setRowHeight(30);
-        jTable1.setShowGrid(false);
+        func.customizeTable(jTable1);
         // customize the header table row
-        jTable1.getTableHeader().setBackground(Color.yellow);
+        jTable1.getTableHeader().setBackground(new Color(42,187,155));
         jTable1.getTableHeader().setForeground(Color.white);
         jTable1.getTableHeader().setFont(new Font("Verdana",Font.BOLD,20));
         jTable1.getTableHeader().setOpaque(false); // نقدر نكبر ونصغر الاعمدة ف الجدول 
         // to hide thered sentence 
        jLabel6.setVisible(false);
+       //populat Jtable with genres
+       populatJtablewithgenres();
     }
 
     /**
@@ -87,7 +87,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
         jLabel1.setText("   Manage Books Genres");
         jLabel1.setOpaque(true);
 
-        jLabel2.setBackground(java.awt.Color.gray);
+        jLabel2.setBackground(new java.awt.Color(255, 51, 51));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -125,13 +125,10 @@ public class ManageGenresForm extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,9 +172,8 @@ public class ManageGenresForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField_NAME, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                                .addComponent(jTextField_ID)))
+                            .addComponent(jTextField_NAME, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                            .addComponent(jTextField_ID))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -239,17 +235,25 @@ public class ManageGenresForm extends javax.swing.JFrame {
 
     private void jButton_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EditActionPerformed
            //edit  genre
-        int id = Integer.valueOf(jTextField_ID.getText());
-        String name = jTextField_NAME.getText();
-          
+        
+        String name = jTextField_NAME.getText(); 
         if(name.isEmpty()){
-  
         System.out.println("Emoty Value!");
         jLabel6.setVisible(true);
         }else
         {
-          genre.editGenre(id, name);
-        }
+            try{
+             int id = Integer.parseInt(jTextField_ID.getText());
+             genre.editGenre(id, name);
+                    //populat Jtable with genres
+                      populatJtablewithgenres();
+            }
+            catch(NumberFormatException ex){
+               JOptionPane.showMessageDialog(null,"Invalid Genre ID: " + ex.getMessage(),"Error",0);
+            
+            }
+            }
+        
     }//GEN-LAST:event_jButton_EditActionPerformed
 
     private void jButton_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddActionPerformed
@@ -259,32 +263,67 @@ public class ManageGenresForm extends javax.swing.JFrame {
   
         System.out.println("Emoty Value!");
         jLabel6.setVisible(true);
-        }else
-        {
-        
+        }else{
         genre.addGenre(name);
+               //refreshing  Jtable  genres
+               populatJtablewithgenres();
         }
     }//GEN-LAST:event_jButton_AddActionPerformed
 
     private void jButton_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DeleteActionPerformed
-// delete the selected genre
+          // remove the selected genre
+             try{
+             int id = Integer.parseInt(jTextField_ID.getText());
+             genre.deleteGenre(id);
+                    //populat Jtable with genres
+                       populatJtablewithgenres();
+                       // clear text from text field 
+                       jTextField_ID.setText("");
+                       jTextField_NAME.setText("");
+            }
+            catch(NumberFormatException ex){
+               JOptionPane.showMessageDialog(null,"Invalid Genre ID: " + ex.getMessage(),"Error",0);
+            
+            }
 
     }//GEN-LAST:event_jButton_DeleteActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 //display the selected genre 
-
-        
+    //get the selected row index 
+    int index = jTable1.getSelectedRow();
+    //get values 
+    String id= jTable1.getValueAt(index, 0).toString();
+    String name= jTable1.getValueAt(index, 1).toString();
+    // show data text fields 
+    jTextField_ID.setText(id);
+    jTextField_NAME.setText(name);
+    
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         //hide jlabel on click
         jLabel6.setVisible(false);
     }//GEN-LAST:event_jLabel6MouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
+// create function to populate the table with genres
+    public void populatJtablewithgenres(){
+       ArrayList<My_Classes.Genre> genresList  = genre.genreList();
+       // jlabel columns
+       String[] colNames = {"ID","NAME"};
+       // row 
+       Object[][] rows= new Object[genresList.size()][colNames.length];
+       for(int i=0 ;i<genresList.size();i++){
+       
+       rows[i][0] = genresList.get(i).getId();
+       rows[i][1] = genresList.get(i).getName();
+       }
+        DefaultTableModel model = new DefaultTableModel(rows,colNames);
+       jTable1.setModel(model);
+    }
+    
+ 
+    
+    
    public static void main(String args[]) {
     /* استدعاء الواجهة مباشرة  */
     java.awt.EventQueue.invokeLater(new Runnable() {
@@ -292,8 +331,8 @@ public class ManageGenresForm extends javax.swing.JFrame {
             new ManageGenresForm().setVisible(true);
         }
     });
-}
 
+   }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Add;
     private javax.swing.JButton jButton_Delete;
