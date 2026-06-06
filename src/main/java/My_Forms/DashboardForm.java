@@ -4,6 +4,7 @@
  */
 package My_Forms;
 
+import My_Classes.Function_Class;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
@@ -17,13 +18,14 @@ import javax.swing.border.Border;
 
 /**
  *
- * @author LCS
+ * @author omayma
  */
 public class DashboardForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardForm.class.getName());
     Border buttonBorder1 = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white);
-    Border buttonBorder0 = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(36,37,42));    
+    Border buttonBorder0 = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(36,37,42));  
+    My_Classes.Function_Class function_Class = new Function_Class();
     /**
      * Creates new form DashboardForm
      */
@@ -31,7 +33,8 @@ public class DashboardForm extends javax.swing.JFrame {
         initComponents();
         //create form.....
         this.setLocationRelativeTo(null);
-        displayImage();
+        // display image in  dashboard left side
+        function_Class.displayImage(jLabel_Dashboard_logo.getWidth(), jLabel_Dashboard_logo.getHeight(), "/My_Images/dashboard_book.png", jLabel_Dashboard_logo);
         
         // add borderto the panel Header                                      
         Border panelHeaderBorder = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white);
@@ -45,21 +48,13 @@ public class DashboardForm extends javax.swing.JFrame {
         jPanel_3_header.setBorder(panelHeader_3_Border);
         Border panelHeader_4_Border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(115,40,125));
         jPanel_4_header4.setBorder(panelHeader_4_Border);
+               // add borders to  button
+               addBorders();
+               // hover effect 
+               buttonsHoverEffect();
+               
     }
-    // image display function in jLabel1
-    public void displayImage(){
-        //get image 
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/My_Images/dashboard_book.png"));
-        // make image fit jLabel 
-        Image image = imageIcon.getImage().getScaledInstance(jLabel_Dashboard_logo.getWidth(), jLabel_Dashboard_logo.getHeight(),Image.SCALE_SMOOTH);
-        // set image into jLabel
-        jLabel_Dashboard_logo.setIcon(new ImageIcon(image));
-        // add borders to  button
-        addBorders();
-    // hover effect 
-    buttonsHoverEffect();
-    // create unction to add border to all buttons in the menu 
-    }
+
     public void addBorders()
     {
     // get all components in the panel menu

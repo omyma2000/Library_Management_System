@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author LCS
+ * @author omayma
  */
 public class LoginForm extends javax.swing.JFrame {
     
@@ -28,20 +28,14 @@ public class LoginForm extends javax.swing.JFrame {
         
         //creater form 
         this.setLocationRelativeTo(null);
-        //display image
-        displayImage();
+        //display image logo in the top 
+        
+        My_Classes.Function_Class func = new My_Classes.Function_Class();
+        func.displayImage(jLabel_Logo.getWidth(), jLabel_Logo.getHeight(), "/My_Images/book_login_logo.png", jLabel_Logo);
+        
         
     }
-// image display function in jLabel1
-    public void displayImage(){
-        //get image 
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/My_Images/book_login_logo.png"));
-        // make image fit jLabel 
-        Image image = imageIcon.getImage().getScaledInstance(jLabel_Logo.getWidth(), jLabel_Logo.getHeight(),Image.SCALE_SMOOTH);
-        // set image into jLabel
-        jLabel_Logo.setIcon(new ImageIcon(image));
-    
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
