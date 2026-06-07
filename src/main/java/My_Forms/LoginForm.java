@@ -4,7 +4,7 @@
  */
 package My_Forms;
 
-import My_Classes.DB;
+import DataBase.DB;
 import java.awt.Image;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,4 +1,5 @@
 package My_Classes;
+import DataBase.DB;
 import com.mysql.cj.protocol.Resultset;
 import java.awt.Color;
 import java.awt.Font;
