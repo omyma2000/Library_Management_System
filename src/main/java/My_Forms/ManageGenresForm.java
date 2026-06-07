@@ -36,7 +36,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
         
         //display image 
         My_Classes.Function_Class func = new My_Classes.Function_Class();
-        func.displayImage(75, 60, "/My_Images/clker-free-vector-images-hierarchy-35795_1280.png", jLabel1);
+        func.displayImage(75, 60, null,"/My_Images/clker-free-vector-images-hierarchy-35795_1280.png", jLabel1);
         func.customizeTable(jTable1);
         // customize the header table row
         jTable1.getTableHeader().setBackground(new Color(42,187,155));

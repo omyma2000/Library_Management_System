@@ -34,7 +34,7 @@ public class DashboardForm extends javax.swing.JFrame {
         //create form.....
         this.setLocationRelativeTo(null);
         // display image in  dashboard left side
-        function_Class.displayImage(jLabel_Dashboard_logo.getWidth(), jLabel_Dashboard_logo.getHeight(), "/My_Images/dashboard_book.png", jLabel_Dashboard_logo);
+        function_Class.displayImage(jLabel_Dashboard_logo.getWidth(), jLabel_Dashboard_logo.getHeight(), null,"/My_Images/dashboard_book.png", jLabel_Dashboard_logo);
         
         // add borderto the panel Header                                      
         Border panelHeaderBorder = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white);

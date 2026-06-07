@@ -15,10 +15,23 @@ import javax.swing.JTable;
 
 public class Function_Class {
      // image display function in jLabel1
-    public void displayImage(int width , int height, String imagePath , JLabel label ){
+    public void displayImage(int width , int height,byte[]imagebyte,String imagePath , JLabel label ){
         //get image 
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource(imagePath));
-        // make image fit jLabel 
+        ImageIcon imageIcon;
+        if(imagebyte!= null){ // get image by bytes
+        imageIcon = new ImageIcon(imagebyte);
+        }else{    try {
+             // get image using project resource 
+            
+        imageIcon = new ImageIcon(getClass().getResource(imagePath));
+                
+            } catch (Exception e) {
+            //get image using desktop 
+           imageIcon = new ImageIcon(imagePath);
+            }
+     
+         }
+          // make image fit jLabel 
         Image image = imageIcon.getImage().getScaledInstance(width, height ,Image.SCALE_SMOOTH);
         // set image into jLabel
         label.setIcon(new ImageIcon(image));
@@ -41,7 +54,6 @@ public class Function_Class {
         table.getTableHeader().setFont(new Font("Verdana",Font.BOLD,fontSize));
         table.getTableHeader().setOpaque(false); // نقدر نكبر ونصغر الاعمدة ف الجدول 
          }
-    
     
     
     // return resultSet function 

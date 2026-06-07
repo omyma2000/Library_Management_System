@@ -31,7 +31,7 @@ public class LoginForm extends javax.swing.JFrame {
         //display image logo in the top 
         
         My_Classes.Function_Class func = new My_Classes.Function_Class();
-        func.displayImage(jLabel_Logo.getWidth(), jLabel_Logo.getHeight(), "/My_Images/book_login_logo.png", jLabel_Logo);
+        func.displayImage(jLabel_Logo.getWidth(), jLabel_Logo.getHeight(), null,"/My_Images/book_login_logo.png", jLabel_Logo);
         
         
     }

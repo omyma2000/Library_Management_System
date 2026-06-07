@@ -32,7 +32,7 @@ public class ManageAuthorsForm extends javax.swing.JFrame {
         
         //display image 
         My_Classes.Function_Class func = new My_Classes.Function_Class();
-        func.displayImage(75, 60, "/My_Images/author.png", jLabel1);
+        func.displayImage(75, 60, null,"/My_Images/author.png", jLabel1);
         // customize table 
         func.customizeTable(jTable_Authors);
        // customize Header table 
