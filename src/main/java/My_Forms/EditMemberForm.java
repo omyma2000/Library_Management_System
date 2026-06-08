@@ -55,7 +55,7 @@ public class EditMemberForm extends javax.swing.JFrame {
        // customize Header table 
      //  func.customizeHeaderTable(jTable_Authors, new Color(34,167,240), 16);
         // to hide thered sentence 
-       jLabel_Empty_Fname.setVisible(false);
+       jLabel_EmptyFname_.setVisible(false);
        jLabel_Empty_name2.setVisible(false);
        jLabel_Empty_Phone.setVisible(false);
       // populat Jtable with Authors
@@ -88,7 +88,7 @@ public class EditMemberForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField_First_NAME = new javax.swing.JTextField();
         jButton_Edit_members = new javax.swing.JButton();
-        jLabel_Empty_Fname = new javax.swing.JLabel();
+        jLabel_EmptyFname_ = new javax.swing.JLabel();
         jTextField_Last_NAME = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -215,11 +215,11 @@ public class EditMemberForm extends javax.swing.JFrame {
         jButton_Edit_members.setText("Edit Member ");
         jButton_Edit_members.addActionListener(this::jButton_Edit_membersActionPerformed);
 
-        jLabel_Empty_Fname.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel_Empty_Fname.setText("* Enter the First Name");
-        jLabel_Empty_Fname.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel_EmptyFname_.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel_EmptyFname_.setText("* Enter the First Name");
+        jLabel_EmptyFname_.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_Empty_FnameMouseClicked(evt);
+                jLabel_EmptyFname_MouseClicked(evt);
             }
         });
 
@@ -320,7 +320,7 @@ public class EditMemberForm extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField_First_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_Empty_Fname))
+                                .addComponent(jLabel_EmptyFname_))
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField_Last_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -361,7 +361,7 @@ public class EditMemberForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField_First_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Empty_Fname))
+                    .addComponent(jLabel_EmptyFname_))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -392,8 +392,8 @@ public class EditMemberForm extends javax.swing.JFrame {
                         .addComponent(jButton_selectPhoto))
                     .addComponent(jLabel_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton_Edit_members)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(jButton_Edit_members, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jLabel1.setBackground(new java.awt.Color(1, 152, 117));
@@ -474,18 +474,24 @@ public class EditMemberForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_EditActionPerformed
 
     private void jButton_Edit_membersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Edit_membersActionPerformed
-        // add new member
+       
+        // edit new member
+        //hide empty jlabel
+        jLabel_EmptyFname_.setVisible(false);
+        jLabel_Empty_Lname.setVisible(false);
+        jLabel_Empty_Phone.setVisible(false);
+        //get member data 
         String fname = jTextField_First_NAME.getText();
         String Lname = jTextField_Last_NAME.getText();
         String phone = jTextField_Phone.getText();
-       String email = jTextField_Email.getText();
-       String gender = jComboBox_Gender.getSelectedItem().toString();
+        String email = jTextField_Email.getText();
+        String gender = jComboBox_Gender.getSelectedItem().toString();
             if(fname.isEmpty()){
         System.out.println("First name is Emoty Value!");
-        jLabel_Empty_Fname.setVisible(true);
+        jLabel_EmptyFname_.setVisible(true);
         }else if (Lname.isEmpty()){
           System.out.println("Last name is Emoty Value!");
-        jLabel_Empty_Fname.setVisible(true);
+       jLabel_Empty_Lname.setVisible(true);
          }else if (phone.isEmpty()){
          
          jLabel_Empty_Phone.setVisible(true);
@@ -495,9 +501,10 @@ public class EditMemberForm extends javax.swing.JFrame {
          if (imagePath != null){
         
              try {
+                 Integer id = Integer.parseInt(jTextField_Id.getText());
                  Path path = Paths.get(imagePath);
                  img = Files.readAllBytes(path);
-                 member.addMember(fname, Lname, phone, email, gender, img);
+                 member.editmember(id ,fname, Lname, phone, email, gender, img);
              } catch (IOException ex) {
                  System.getLogger(EditMemberForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
              }
@@ -538,10 +545,10 @@ public class EditMemberForm extends javax.swing.JFrame {
     
     }//GEN-LAST:event_jTable_AuthorsMouseClicked
 
-    private void jLabel_Empty_FnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Empty_FnameMouseClicked
+    private void jLabel_EmptyFname_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_EmptyFname_MouseClicked
         //hide jlabel on click
-        jLabel_Empty_Fname.setVisible(false);
-    }//GEN-LAST:event_jLabel_Empty_FnameMouseClicked
+        jLabel_EmptyFname_.setVisible(false);
+    }//GEN-LAST:event_jLabel_EmptyFname_MouseClicked
 
     private void jTextField_Last_NAMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_Last_NAMEActionPerformed
         // TODO add your handling code here:
@@ -637,8 +644,8 @@ public class EditMemberForm extends javax.swing.JFrame {
            Integer id = Integer.parseInt(jTextField_Id.getText());
            SelectMember = member.getMemberByID(id);
            if(SelectMember!= null){
-             
-        jTextField_Id.setText(String.valueOf((char) SelectMember.getId()));
+         System.out.println(SelectMember.getFirstName());
+        jTextField_Id.setText(String.valueOf( SelectMember.getId()));
         jTextField_First_NAME.setText(SelectMember.getFirstName());
         jTextField_Last_NAME.setText(SelectMember.getLasttName());
         jTextField_Phone.setText(SelectMember.getPhone());
@@ -686,7 +693,7 @@ public class EditMemberForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabel_Empty_Fname;
+    private javax.swing.JLabel jLabel_EmptyFname_;
     private javax.swing.JLabel jLabel_Empty_Fname1;
     private javax.swing.JLabel jLabel_Empty_Fname2;
     private javax.swing.JLabel jLabel_Empty_Fname3;

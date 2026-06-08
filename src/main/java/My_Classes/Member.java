@@ -126,18 +126,17 @@ String insertQuery ="INSERT INTO `members` (`firstName`, `lastName`, `phoneNo`, 
        }
 // to edit member  by id 
 public void editmember(Integer _id , String _fname, String _Lname, String _phone, String _email,String _gender ,byte [] _photo){
-    String editQuery ="UPDATE `members` SET `firstName`=?,`lastName`=?,`phoneNo`=?,`email`=?,'gender' ,`photo`=?  WHERE `id`=?";
-
+    String editQuery ="UPDATE `members` SET `firstName`=?, `lastName`=?, `phoneNo`=?, `email`=?, `gender`=?, `photo`=? WHERE `id`=?";
     try {
 
         PreparedStatement ps =    DB.getConnection().prepareStatement(editQuery);
-        ps.setInt(1, _id);
-        ps.setString(2, _fname);
-        ps.setString(3, _Lname);
-        ps.setString(4, _phone);
-        ps.setString(5, _email);
-        ps.setString(6, _gender);
-        ps.setBytes(7, _photo);
+        ps.setString(1, _fname);
+        ps.setString(2, _Lname);
+        ps.setString(3, _phone);
+        ps.setString(4, _email);
+        ps.setString(5, _gender);
+        ps.setBytes(6, _photo);
+        ps.setInt(7, _id);
         
         
 
@@ -185,10 +184,45 @@ public void editmember(Integer _id , String _fname, String _Lname, String _phone
       Function_Class fc =new  Function_Class();
       String query = "SELECT * FROM `members` WHERE `id`="+_id;
       ResultSet rs =  fc.getData(query);
-       if(rs.next() ){
-       return  new Member(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getBytes(7));
-       }else {
+      if(rs.next()) {
+
+    System.out.println("Member Found");
+
+    return new Member(
+        rs.getInt(1),
+        rs.getString(2),
+        rs.getString(3),
+        rs.getString(4),
+        rs.getString(5),
+        rs.getString(6),
+        rs.getBytes(7)
+    );
+
+}else {
        return null;
        }
+      
    }
+     // function to populate an arraylist with Members
+    public ArrayList<Member>membesList()
+    {
+            ArrayList<Member> mList = new ArrayList<>();
+            My_Classes.Function_Class function = new Function_Class();
+       
+            
+            try {
+                 
+            ResultSet rs= function.getData("SELECT * FROM `members`");
+            Member member;
+            while (rs.next()) {                                      
+               member = new Member(rs.getInt("id"), rs.getString("firstName"), rs.getString("lasttName"),rs.getString("phone"), rs.getString("email"), rs.getString("gender"),rs.getBytes("photo"));
+               mList.add(member);
+            }
+            
+            
+        } catch (SQLException ex) {
+            System.getLogger(Authors.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return  mList;
+    }
 }
