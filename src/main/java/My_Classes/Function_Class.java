@@ -15,27 +15,30 @@ import javax.swing.JTable;
 
 public class Function_Class {
      // image display function in jLabel1
-    public void displayImage(int width , int height,byte[]imagebyte,String imagePath , JLabel label ){
-        //get image 
+    public void displayImage(int width, int height, byte[] imagebyte, String imagePath, JLabel label) {
+
+    try {
         ImageIcon imageIcon;
-        if(imagebyte!= null){ // get image by bytes
-        imageIcon = new ImageIcon(imagebyte);
-        }else{    try {
-             // get image using project resource 
-            
-        imageIcon = new ImageIcon(getClass().getResource(imagePath));
-                
-            } catch (Exception e) {
-            //get image using desktop 
-           imageIcon = new ImageIcon(imagePath);
-            }
-     
-         }
-          // make image fit jLabel 
-        Image image = imageIcon.getImage().getScaledInstance(width, height ,Image.SCALE_SMOOTH);
-        // set image into jLabel
+
+        if (imagebyte != null && imagebyte.length > 0) {
+            imageIcon = new ImageIcon(imagebyte);
+        } else if (imagePath != null && !imagePath.isEmpty()) {
+            imageIcon = new ImageIcon(getClass().getResource(imagePath));
+        } else {
+            System.out.println("No image provided!");
+            return;
+        }
+
+        Image image = imageIcon.getImage()
+                .getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
         label.setIcon(new ImageIcon(image));
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        System.out.println("Error loading image");
     }
+}
     //costomize function 
     public void customizeTable(JTable table){
     // customize table 
@@ -70,4 +73,5 @@ public class Function_Class {
     
     return rs;
     }
+   
 }

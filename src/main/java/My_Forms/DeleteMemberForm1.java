@@ -370,7 +370,7 @@ public class DeleteMemberForm1 extends javax.swing.JFrame {
         // show confirmation message before deleting 
         int confirm = JOptionPane.showConfirmDialog(null, "Are You Sure Want To Delete This Member !","confirmation Bow",JOptionPane.YES_OPTION);
         if(confirm == JOptionPane.YES_OPTION){
-         member.deleteAuthor(id);
+         member.deleteMember(id);
         }else{
             System.out.println("cancel ");
         }

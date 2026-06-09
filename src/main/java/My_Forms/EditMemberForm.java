@@ -1,65 +1,51 @@
 package My_Forms;
-import My_Classes.Authors;
+
 import My_Classes.Member;
-import My_Forms.DashboardForm;
-import com.mysql.cj.xdevapi.Result;
 import java.awt.Color;
-import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author omayma
  */
-
 public class EditMemberForm extends javax.swing.JFrame {
+   private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditMemberForm.class.getName());
     
-   private static final java.util.logging.Logger logger =java.util.logging.Logger.getLogger(EditMemberForm.class.getName());
-    /**
-     * Creates new form ManageGenresForm
-     */
-   // member object 
+    // تعريف كائنات الكلاسات الخاصة بالأعضاء والدوال المساعدة
     My_Classes.Member member = new My_Classes.Member();
-     // function class instance  object 
     My_Classes.Function_Class func = new My_Classes.Function_Class();
-    String imagePath =null;
+    String imagePath = null;
+
     public EditMemberForm() {
         initComponents();
-        // center form
+        
+        // توسيط النافذة في الشاشة
         this.setLocationRelativeTo(null);
         
-        // add borderto the panel Header                                      
+        // إضافة الحواف الجمالية
         Border panelHeaderBorder = BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(1,152,117));
         jPanel1.setBorder(panelHeaderBorder);
-        // add borderto the photo                                     
-        Border JLabelImageBorder = BorderFactory.createMatteBorder(5, 5,5, 5, new Color(51,51,51));
+        
+        Border JLabelImageBorder = BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(51,51,51));
         jLabel_image1.setBorder(JLabelImageBorder);
         
-        //display image by path 
-         func.displayImage(90, 60,null ,"/My_Images/Add_members.png", jLabel1);
-        // customize table 
-      //  func.customizeTable(jTable_Authors);
-       // customize Header table 
-     //  func.customizeHeaderTable(jTable_Authors, new Color(34,167,240), 16);
-        // to hide thered sentence 
-       jLabel_EmptyFname_.setVisible(false);
-       jLabel_Empty_name2.setVisible(false);
-       jLabel_Empty_Phone.setVisible(false);
-      // populat Jtable with Authors
-      //populatJtablewithAuthors();
+        // عرض أيقونة الفورم الأساسية
+        func.displayImage(90, 60, null, "/My_Images/Add_members.png", jLabel1);
+        
+        // إخفاء جمل التحذير الحمراء عند بدء التشغيل
+        jLabel_EmptyFname_.setVisible(false);
+        jLabel_Empty_name2.setVisible(false);
+        jLabel_Empty_Phone.setVisible(false);
+        jLabel_Empty_Fname2.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -301,50 +287,50 @@ public class EditMemberForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox_Gender, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextField_First_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_EmptyFname_))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextField_Last_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_Empty_name2))
+                    .addComponent(jLabel12)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextField_Phone, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_Empty_Phone))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel_Empty_Fname2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_selectPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel_Photo1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox_Gender, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField_First_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_EmptyFname_))
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField_Last_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_Empty_name2))
-                            .addComponent(jLabel12)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField_Phone, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_Empty_Phone)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel_Empty_Fname2, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                            .addComponent(jTextField_Id))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel_Photo1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jButton_Edit_members, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,7 +339,7 @@ public class EditMemberForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Search))
+                    .addComponent(jButton_Search, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_Empty_Fname2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -393,7 +379,7 @@ public class EditMemberForm extends javax.swing.JFrame {
                     .addComponent(jLabel_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton_Edit_members, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
 
         jLabel1.setBackground(new java.awt.Color(1, 152, 117));
@@ -445,7 +431,7 @@ public class EditMemberForm extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         //close form
-        this.dispose();
+       this.dispose(); // إغلاق الفورم
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jTextField_First_NAMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_First_NAMEActionPerformed
@@ -474,49 +460,50 @@ public class EditMemberForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_EditActionPerformed
 
     private void jButton_Edit_membersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Edit_membersActionPerformed
-       
-        // edit new member
-        //hide empty jlabel
-        jLabel_EmptyFname_.setVisible(false);
+       jLabel_EmptyFname_.setVisible(false);
         jLabel_Empty_Lname.setVisible(false);
         jLabel_Empty_Phone.setVisible(false);
-        //get member data 
-        String fname = jTextField_First_NAME.getText();
-        String Lname = jTextField_Last_NAME.getText();
-        String phone = jTextField_Phone.getText();
-        String email = jTextField_Email.getText();
-        String gender = jComboBox_Gender.getSelectedItem().toString();
-            if(fname.isEmpty()){
-        System.out.println("First name is Emoty Value!");
-        jLabel_EmptyFname_.setVisible(true);
-        }else if (Lname.isEmpty()){
-          System.out.println("Last name is Emoty Value!");
-       jLabel_Empty_Lname.setVisible(true);
-         }else if (phone.isEmpty()){
-         
-         jLabel_Empty_Phone.setVisible(true);
-         }
-         else{
-         byte[] img = null;
-         if (imagePath != null){
         
-             try {
-                 Integer id = Integer.parseInt(jTextField_Id.getText());
-                 Path path = Paths.get(imagePath);
-                 img = Files.readAllBytes(path);
-                 member.editmember(id ,fname, Lname, phone, email, gender, img);
-             } catch (IOException ex) {
-                 System.getLogger(EditMemberForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-             }
-         
-         
-         }else
-         {
-         
-         JOptionPane.showMessageDialog(null,"select a profile picture ","no picture selected", 0);
-         }
-         
-         }
+        String fname = jTextField_First_NAME.getText().trim();
+        String Lname = jTextField_Last_NAME.getText().trim();
+        String phone = jTextField_Phone.getText().trim();
+        String email = jTextField_Email.getText().trim();
+        String gender = jComboBox_Gender.getSelectedItem().toString();
+        
+        if (fname.isEmpty()) {
+            jLabel_EmptyFname_.setVisible(true);
+        } else if (Lname.isEmpty()) {
+            jLabel_Empty_name2.setVisible(true);
+        } else if (phone.isEmpty()) {
+            jLabel_Empty_Phone.setVisible(true);
+        } else {
+            try {
+                int id = Integer.parseInt(jTextField_Id.getText().trim());
+                byte[] img = null;
+                
+                if (imagePath != null) {
+                    // إذا اختار المستخدم صورة جديدة من الجهاز
+                    Path path = Paths.get(imagePath);
+                    img = Files.readAllBytes(path);
+                } else {
+                    // ذكي: إذا لم يقم باختيار صورة جديدة، نجلب صورته الحالية المخزنة مسبقاً كي لا تضيع
+                    Member currentMember = member.getMemberByID(id);
+                    if (currentMember != null) {
+                        img = currentMember.getPhoto();
+                    }
+                }
+                
+                // إرسال البيانات للداتابيس عبر الكلاس المعدل
+                member.editmember(id, fname, Lname, phone, email, gender, img);
+                
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Find the member first using a valid ID", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException | SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error updating profile: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    
     }//GEN-LAST:event_jButton_Edit_membersActionPerformed
 
     private void jButton_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DeleteActionPerformed
@@ -589,6 +576,7 @@ public class EditMemberForm extends javax.swing.JFrame {
 
     private void jLabel_Empty_Fname1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Empty_Fname1MouseClicked
         // TODO add your handling code here:
+        jLabel_EmptyFname_.setVisible(false);
     }//GEN-LAST:event_jLabel_Empty_Fname1MouseClicked
 
     private void jLabel_Empty_name2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Empty_name2MouseClicked
@@ -605,24 +593,25 @@ public class EditMemberForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_Empty_PhoneMouseClicked
 
     private void jButton_selectPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_selectPhotoActionPerformed
-        // TODO add your handling code here:
-        // select photo from your CMP 
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Select Profile Picture ");
-        fileChooser.setCurrentDirectory(new File ("C:\\Users\\LCS\\OneDrive\\الصور"));
-        FileNameExtensionFilter ExtensionFilter = new FileNameExtensionFilter("Image",".png",".jpg","jpeg");
-        fileChooser.addChoosableFileFilter(ExtensionFilter);
-        int fileState = fileChooser.showSaveDialog(null);
-        if(fileState == JFileChooser.APPROVE_OPTION){
-        String path = fileChooser.getSelectedFile().getAbsolutePath();
-        jLabel_Photo.setText(path);
-        imagePath = path;
-        // display the image 
-        func.displayImage(297, 114, null, path, jLabel_image1);
+     JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select Profile Picture");
+        fileChooser.setCurrentDirectory(new File("C:\\Users\\LCS\\OneDrive\\الصور"));
         
+        FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg");
+        fileChooser.setFileFilter(extensionFilter);
+        
+        int fileState = fileChooser.showOpenDialog(null); // تم تعديلها لفتح وليس حفظ
+        
+        if (fileState == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            if (selectedFile != null) {
+                String path = selectedFile.getAbsolutePath();
+                jLabel_Photo1.setText(path);
+                imagePath = path;
+                func.displayImage(297, 114, null, path, jLabel_image1);
+            }
         }
-        
-        
+    
         
     }//GEN-LAST:event_jButton_selectPhotoActionPerformed
 
@@ -635,36 +624,42 @@ public class EditMemberForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_Empty_Fname2MouseClicked
 
     private void jButton_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SearchActionPerformed
-        // TODO add your handling code here:
-        // search by ID
-        
-        
-        Member SelectMember = null;
-       try {
-           Integer id = Integer.parseInt(jTextField_Id.getText());
-           SelectMember = member.getMemberByID(id);
-           if(SelectMember!= null){
-         System.out.println(SelectMember.getFirstName());
-        jTextField_Id.setText(String.valueOf( SelectMember.getId()));
-        jTextField_First_NAME.setText(SelectMember.getFirstName());
-        jTextField_Last_NAME.setText(SelectMember.getLasttName());
-        jTextField_Phone.setText(SelectMember.getPhone());
-        jTextField_Email.setText(SelectMember.getEmail());
-        jComboBox_Gender.setSelectedItem(SelectMember.getGender());
-        // display the member image :
-        byte[] image = SelectMember.getPhoto();
-        //display image by byte 
-        // empty path and not null byte
-        func.displayImage(297, 114,image ,"", jLabel_image1);
-        }else{
-            JOptionPane.showMessageDialog(null, "ID not Exist","Invalid ID",0);
-           }
-         // jLabel_image1.setText(SelectMember.getPhoto());
-       } catch (SQLException | NumberFormatException ex) {
-           System.getLogger(EditMemberForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-           JOptionPane.showMessageDialog(null, "Enter valid ID","Invalid ID",0);
-       }
-      
+try {
+            String text = jTextField_Id.getText().trim();
+            jLabel_Empty_Fname2.setVisible(false);
+
+            if (text.isEmpty()) {
+                jLabel_Empty_Fname2.setVisible(true);
+                return;
+            }
+
+            int id = Integer.parseInt(text);
+            Member selectMember = member.getMemberByID(id);
+
+            if (selectMember != null) {
+                jTextField_First_NAME.setText(selectMember.getFirstName());
+                jTextField_Last_NAME.setText(selectMember.getLasttName());
+                jTextField_Phone.setText(selectMember.getPhone());
+                jTextField_Email.setText(selectMember.getEmail());
+                jComboBox_Gender.setSelectedItem(selectMember.getGender());
+
+                byte[] image = selectMember.getPhoto();
+                if (image != null && image.length > 0) {
+                    func.displayImage(297, 114, image, "", jLabel_image1);
+                } else {
+                    jLabel_image1.setIcon(null);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "ID Does Not Exist", "Invalid ID", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Enter a valid numeric ID", "Format Error", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Database error", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButton_SearchActionPerformed
 
     
