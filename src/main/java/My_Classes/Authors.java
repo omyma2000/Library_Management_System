@@ -22,6 +22,8 @@ public class Authors {
     private String about;
 public Authors(){}
 
+My_Classes.Function_Class func = new My_Classes.Function_Class();
+
     public Authors(int _id, String _ftName , String _LtName,String _expertise, String _about)
     {
     this.id=_id;
@@ -179,4 +181,24 @@ public void editAuthor(int _id , String _fname, String _Lname, String _expertise
         }
         return  aList;
     }
+    //
+    
+    
+public Authors getAuthorsByID(Integer id){
+    ResultSet rs= func.getData("SELECT * FROM `author` where id="+id);
+        Authors authors = null ;
+        try {
+            if (rs.next()) {
+                authors = new Authors(rs.getInt("id"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("expertise"),
+                        rs.getString("about"));
+                  
+            }
+        } catch (SQLException ex) {
+            System.getLogger(Authors.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return authors;
+}
 }

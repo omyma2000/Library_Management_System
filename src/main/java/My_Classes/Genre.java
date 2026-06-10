@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -41,6 +42,7 @@ public class Genre {
         this.name = _name;
     }
     // add genre 
+ My_Classes.Function_Class function = new Function_Class();
 public void addGenre(String _name){
 
     String insertQuery ="INSERT INTO `book_genres`(`name`) VALUES (?)";
@@ -122,7 +124,7 @@ public void editGenre(int _id , String _name){
     {
             ArrayList<Genre> gList = new ArrayList<>();
             
-            My_Classes.Function_Class function = new Function_Class();
+            
          
         try {
            
@@ -141,6 +143,24 @@ public void editGenre(int _id , String _name){
         return  gList;
     }
     
-
+// function to return hashmap
+    public HashMap<String , Integer> getGHashMap(){
+        HashMap<String , Integer> map = new HashMap<>();
+        try {
+            
+            ResultSet rs= function.getData("SELECT * FROM `book_genres`");
+         
+            Genre genre;
+            while (rs.next()) {                
+               genre = new Genre(rs.getInt("id"),rs.getString("name"));
+               map.put(genre.getName(), genre.getId());
+            }
+            
+            
+        } catch (SQLException ex) {
+            System.getLogger(Genre.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return map;
+    }
 }
 

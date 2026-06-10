@@ -24,7 +24,7 @@ public class AddMemberForm extends javax.swing.JFrame {
      */
    // member object 
     My_Classes.Member member = new My_Classes.Member();
-    
+    My_Classes.Function_Class func = new My_Classes.Function_Class();
     String imagePath =null;
     public AddMemberForm() {
         initComponents();
@@ -36,7 +36,7 @@ public class AddMemberForm extends javax.swing.JFrame {
         jPanel1.setBorder(panelHeaderBorder);
         
         //display image 
-        My_Classes.Function_Class func = new My_Classes.Function_Class();
+       
         func.displayImage(90, 60, null ,"/My_Images/Add_members.png", jLabel1);
         // customize table 
       //  func.customizeTable(jTable_Authors);
@@ -540,20 +540,12 @@ public class AddMemberForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_Empty_PhoneMouseClicked
 
     private void jButton_selectPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_selectPhotoActionPerformed
-        // TODO add your handling code here:
-        // select photo from your CMP 
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Select Profile Picture ");
-        fileChooser.setCurrentDirectory(new File ("C:\\Users\\LCS\\OneDrive\\الصور"));
-        FileNameExtensionFilter ExtensionFilter = new FileNameExtensionFilter("Image",".png",".jpg","jpeg");
-        fileChooser.addChoosableFileFilter(ExtensionFilter);
-        int fileState = fileChooser.showSaveDialog(null);
-        if(fileState == JFileChooser.APPROVE_OPTION){
-        String path = fileChooser.getSelectedFile().getAbsolutePath();
+        
+        String path = func.selectImage();
         jLabel_Photo.setText(path);
         imagePath = path;
+        func.displayImage(125, 80, null,path, jLabel_Photo);
         
-        }
         
         
         
