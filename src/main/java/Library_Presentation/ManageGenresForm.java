@@ -52,7 +52,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
         buis.customizeTable(jTable1, new Color(255,153,0), Color.white);
 
         jTable1.getTableHeader().setForeground(Color.white);
-        jTable1.getTableHeader().setFont(new Font("Verdana",Font.BOLD,20));
+        jTable1.getTableHeader().setFont(new Font("SansSerif",Font.BOLD,20));
         jTable1.getTableHeader().setOpaque(false); // نقدر نكبر ونصغر الاعمدة ف الجدول 
         // to hide thered sentence 
        jLabel6.setVisible(false);
@@ -70,6 +70,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -86,6 +87,9 @@ public class ManageGenresForm extends javax.swing.JFrame {
 
         jLabel3.setText("jLabel3");
 
+        jButton1.setText("تقرير");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
@@ -95,7 +99,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("   Manage Books Genres");
+        jLabel1.setText("إدارة اصناف الكتب ");
         jLabel1.setOpaque(true);
 
         jLabel2.setBackground(new java.awt.Color(255, 51, 51));
@@ -111,27 +115,28 @@ public class ManageGenresForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel4.setText("Name:");
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel4.setText("اسم الصنف");
 
         jLabel5.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel5.setText("ID:");
 
         jTextField_ID.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jTextField_ID.addActionListener(this::jTextField_IDActionPerformed);
 
         jTextField_NAME.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField_NAME.addActionListener(this::jTextField_NAMEActionPerformed);
 
         jButton_Edit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton_Edit.setText("Edit");
+        jButton_Edit.setText("تعديل");
         jButton_Edit.addActionListener(this::jButton_EditActionPerformed);
 
         jButton_Add.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton_Add.setText("Add");
+        jButton_Add.setText("اضافة");
         jButton_Add.addActionListener(this::jButton_AddActionPerformed);
 
         jButton_Delete.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton_Delete.setText("Delete");
+        jButton_Delete.setText("حذف");
         jButton_Delete.addActionListener(this::jButton_DeleteActionPerformed);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -150,7 +155,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel6.setText("* Enter the Genre Name");
+        jLabel6.setText("* ادخل الصنف");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
@@ -162,31 +167,33 @@ public class ManageGenresForm extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(34, Short.MAX_VALUE)
-                        .addComponent(jButton_Add)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_Edit)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_Delete)
-                        .addGap(36, 36, 36))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                            .addComponent(jTextField_NAME, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                            .addComponent(jTextField_ID))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton_Delete)
+                                .addGap(30, 30, 30)
+                                .addComponent(jButton_Edit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton_Add))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jTextField_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(110, 110, 110)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -197,34 +204,35 @@ public class ManageGenresForm extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_Delete)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton_Edit)
-                                .addComponent(jButton_Add)))
-                        .addGap(40, 40, 40))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton_Edit)
+                            .addComponent(jButton_Add)
+                            .addComponent(jButton_Delete))
+                        .addGap(41, 41, 41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,7 +257,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
         
         String name = jTextField_NAME.getText(); 
         if(name.isEmpty()){
-        System.out.println("Emoty Value!");
+        System.out.println("حقل فارغ!");
         jLabel6.setVisible(true);
         }else
         {
@@ -260,7 +268,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
                       populatJtablewithgenres();
             }
             catch(NumberFormatException ex){
-               JOptionPane.showMessageDialog(null,"Invalid Genre ID: " + ex.getMessage(),"Error",0);
+               JOptionPane.showMessageDialog(null,"IDخطأ " + ex.getMessage(),"خطأ",0);
             
             }
             }
@@ -272,7 +280,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
         String name = jTextField_NAME.getText();
         if(name.isEmpty()){
   
-        System.out.println("Emoty Value!");
+        System.out.println("حقل فارغ!");
         jLabel6.setVisible(true);
         }else{
         genre.addGenre(name);
@@ -293,7 +301,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
                        jTextField_NAME.setText("");
             }
             catch(NumberFormatException ex){
-               JOptionPane.showMessageDialog(null,"Invalid Genre ID: " + ex.getMessage(),"Error",0);
+               JOptionPane.showMessageDialog(null," ID خطأ " + ex.getMessage(),"خطأ",0);
             
             }
 
@@ -316,11 +324,19 @@ public class ManageGenresForm extends javax.swing.JFrame {
         //hide jlabel on click
         jLabel6.setVisible(false);
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jTextField_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_IDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_IDActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 // create function to populate the table with genres
     public void populatJtablewithgenres(){
        ArrayList<Library_Domain.Genre> genresList  = genre.genreList();
        // jlabel columns
-       String[] colNames = {"ID","NAME"};
+       String[] colNames = {"الاسم ","ID"};
        // row 
        Object[][] rows= new Object[genresList.size()][colNames.length];
        for(int i=0 ;i<genresList.size();i++){
@@ -345,6 +361,7 @@ public class ManageGenresForm extends javax.swing.JFrame {
 
    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_Add;
     private javax.swing.JButton jButton_Delete;
     private javax.swing.JButton jButton_Edit;
