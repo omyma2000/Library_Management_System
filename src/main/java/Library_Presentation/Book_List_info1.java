@@ -1,5 +1,6 @@
 
 package Library_Presentation;
+import Library_Data.DB;
 import java.awt.Color;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -83,12 +84,13 @@ public class Book_List_info1 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jButton_search_betweenTwoDate = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jCalendarComboBox_2 = new de.wannawork.jcalendar.JCalendarComboBox();
         jLabel7 = new javax.swing.JLabel();
         jCalendarComboBox_1 = new de.wannawork.jcalendar.JCalendarComboBox();
+        jButton_search_betweenTwoDate = new javax.swing.JButton();
         jLabel_image = new javax.swing.JLabel();
+        jButton_report = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2_ImageLayout = new javax.swing.GroupLayout(jPanel2_Image);
         jPanel2_Image.setLayout(jPanel2_ImageLayout);
@@ -171,15 +173,16 @@ public class Book_List_info1 extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_book_search_, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_search)))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField_book_search_, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_search)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,10 +200,6 @@ public class Book_List_info1 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         jLabel5.setText("تاريخ الاستلام من ");
 
-        jButton_search_betweenTwoDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton_search_betweenTwoDate.setText("بحث");
-        jButton_search_betweenTwoDate.addActionListener(this::jButton_search_betweenTwoDateActionPerformed);
-
         jLabel6.setBackground(new java.awt.Color(204, 204, 204));
         jLabel6.setForeground(new java.awt.Color(255, 0, 0));
         jLabel6.setText("* بحث بين التاريخين ");
@@ -208,77 +207,92 @@ public class Book_List_info1 extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         jLabel7.setText("حتى");
 
+        jButton_search_betweenTwoDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton_search_betweenTwoDate.setText("بحث");
+        jButton_search_betweenTwoDate.addActionListener(this::jButton_search_betweenTwoDateActionPerformed);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCalendarComboBox_1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCalendarComboBox_2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_search_betweenTwoDate))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCalendarComboBox_2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_search_betweenTwoDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
-                .addGap(4, 4, 4)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCalendarComboBox_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton_search_betweenTwoDate)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCalendarComboBox_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCalendarComboBox_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCalendarComboBox_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLabel_image.setBackground(new java.awt.Color(204, 204, 255));
         jLabel_image.setOpaque(true);
 
+        jButton_report.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton_report.setText("تقرير");
+        jButton_report.addActionListener(this::jButton_reportActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1017, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel_ISBM)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1017, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel_price)
+                                    .addComponent(jLabel_image, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel_publisher)
+                                    .addComponent(jLabel_genre)
+                                    .addComponent(jLabel_euthor)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel_image, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel_name, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addComponent(jLabel_euthor, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addComponent(jLabel_genre, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(jLabel_publisher)
-                            .addComponent(jLabel_price))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jLabel_ISBM)
+                                        .addComponent(jLabel_name))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jButton_report, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(188, 188, 188)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,19 +300,20 @@ public class Book_List_info1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel_image, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel_ISBM, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel_name)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel_euthor)
@@ -307,15 +322,17 @@ public class Book_List_info1 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel_publisher)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel_price, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel_price, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton_report)))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 953, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,45 +367,78 @@ public class Book_List_info1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_searchActionPerformed
 
     private void jTable_Books_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Books_MouseClicked
-    
-        Library_Domain.Book selectBook = null;
+                                           
+    Library_Domain.Book selectBook = null;
     try {
+        // 1. الحصول على الصف المحدد
+        int rowIndex = jTable_Books_.getSelectedRow();
+        if (rowIndex == -1) return; 
 
-          Integer rowIndex = jTable_Books_.getSelectedRow();
+        // 2. البحث عن رقم عمود الـ ID ديناميكياً باستخدام اسمه
+        int idColumnIndex = -1;
+        for (int i = 0; i < jTable_Books_.getColumnCount(); i++) {
+            if (jTable_Books_.getColumnName(i).equalsIgnoreCase("ID")) {
+                idColumnIndex = i;
+                break;
+            }
+        }
 
-     
+        // إذا لم يجد عمود باسم ID، نستخدم العمود رقم 0 كخيار احتياطي طوارئ
+        if (idColumnIndex == -1) {
+            idColumnIndex = 0; 
+        }
 
-        int id = Integer.parseInt( jTable_Books_.getModel().getValueAt(rowIndex, 0) .toString());
+        // 3. جلب القيمة وتحويلها إلى رقم ID صريح
+        Object idValue = jTable_Books_.getValueAt(rowIndex, idColumnIndex); 
+        if (idValue == null) {
+            JOptionPane.showMessageDialog(this, "خطأ: خانة المعرّف ID فارغة في هذا الصف.");
+            return;
+        }
+        
+        int id = Integer.parseInt(idValue.toString().trim());
 
+        // 4. استدعاء بيانات الكتاب من قاعدة البيانات
         selectBook = book.getBookByID(id);
 
         if (selectBook != null) {
-
-            jLabel_ISBM.setText(selectBook.getIsbn() );
-             jLabel_name.setText(selectBook.getName());
-             // display author name 
-            jLabel_euthor.setText(authors.getAuthorsByID(selectBook.getAuthor_id()).getFirstName()+ " "+authors.getAuthorsByID(selectBook.getAuthor_id()).getLastName());
-             // display genre name
-            jLabel_genre.setText(genre.getGenreByID(selectBook.getGenre_id()).getName());
+            // تعبئة النصوص في الشاشة
+            jLabel_ISBM.setText(selectBook.getIsbn());
+            jLabel_name.setText(selectBook.getName());
+            
+            // عرض اسم المؤلف بأمان
+            if (authors != null && authors.getAuthorsByID(selectBook.getAuthor_id()) != null) {
+                jLabel_euthor.setText(authors.getAuthorsByID(selectBook.getAuthor_id()).getFirstName() + " " + authors.getAuthorsByID(selectBook.getAuthor_id()).getLastName());
+            } else {
+                jLabel_euthor.setText(String.valueOf(selectBook.getAuthor_id()));
+            }
+            
+            // عرض التصنيف بأمان
+            if (genre != null && genre.getGenreByID(selectBook.getGenre_id()) != null) {
+                jLabel_genre.setText(genre.getGenreByID(selectBook.getGenre_id()).getName());
+            } else {
+                jLabel_genre.setText(String.valueOf(selectBook.getGenre_id()));
+            }
+            
             jLabel_publisher.setText(selectBook.getPublisher());
             jLabel_price.setText(String.valueOf(selectBook.getPrice()));
-            
-            
 
+            // 5. عرض الصورة
             byte[] image = selectBook.getCover();
-
-            func.displayImage(200, 150, image, "", jLabel_image);
+            if (image != null && image.length > 0) {
+                func.displayImage(jLabel_image.getWidth(), jLabel_image.getHeight(), image, "", jLabel_image);
+            } else {
+                jLabel_image.setIcon(null); 
+            }
 
         } else {
-
-            JOptionPane.showMessageDialog(null,"العضو غير موجود", "خطأ", 0);
+            JOptionPane.showMessageDialog(null, "عفواً، لم يتم العثور على بيانات هذا الكتاب بالـ ID: " + id, "خطأ", JOptionPane.ERROR_MESSAGE);
         }
 
     } catch (Exception ex) {
-        JOptionPane.showMessageDialog(null,  "Error: " + ex.getMessage(), "Exception",0);
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
     }
 
-     
     }//GEN-LAST:event_jTable_Books_MouseClicked
 
     private void jButton_search_betweenTwoDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_search_betweenTwoDateActionPerformed
@@ -404,6 +454,34 @@ public class Book_List_info1 extends javax.swing.JFrame {
         }
        
     }//GEN-LAST:event_jButton_search_betweenTwoDateActionPerformed
+
+    private void jButton_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_reportActionPerformed
+       try {
+    // 1. تحديد مسار التقرير داخل الـ resources
+    java.io.InputStream reportStream = getClass().getResourceAsStream("/books_report.jasper");
+    
+    if (reportStream == null) {
+        javax.swing.JOptionPane.showMessageDialog(this, "لم يتم العثور على ملف التقرير!");
+        return;
+    }
+
+    // 2. باراميترز فارغة (لو مش مستخدمتيهم)
+    java.util.HashMap<String, Object> parameters = new java.util.HashMap<>();
+    
+    // 3. تعبئة التقرير بالبيانات عبر استدعاء اتصال قاعدة البيانات الخاص بكِ
+    net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(reportStream, parameters, DB.getConnection());
+
+    // 4. عرض التقرير في نافذة للمستخدم
+    net.sf.jasperreports.view.JasperViewer viewer = new net.sf.jasperreports.view.JasperViewer(jasperPrint, false);
+    viewer.setTitle("قائمة الكتب");
+    viewer.setVisible(true);
+
+} catch (Exception e) {
+    e.printStackTrace();
+    javax.swing.JOptionPane.showMessageDialog(this, "خطأ أثناء عرض التقرير: " + e.getMessage());
+}
+        
+    }//GEN-LAST:event_jButton_reportActionPerformed
 
         //==========================================
   // create function to populate the table with Author
@@ -463,6 +541,7 @@ public class Book_List_info1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_report;
     private javax.swing.JButton jButton_search;
     private javax.swing.JButton jButton_search_betweenTwoDate;
     private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBox_1;

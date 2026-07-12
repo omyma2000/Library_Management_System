@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Library_Presentation;
+import Library_Data.DB;
 import Library_Domain.Member;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -74,6 +75,7 @@ public class Member_List_info extends javax.swing.JFrame {
         jLabel_Email = new javax.swing.JLabel();
         jLabel_gender = new javax.swing.JLabel();
         jLabel_image1 = new javax.swing.JLabel();
+        jButton_search1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2_ImageLayout = new javax.swing.GroupLayout(jPanel2_Image);
         jPanel2_Image.setLayout(jPanel2_ImageLayout);
@@ -145,6 +147,10 @@ public class Member_List_info extends javax.swing.JFrame {
         jLabel_image1.setBackground(new java.awt.Color(204, 204, 255));
         jLabel_image1.setOpaque(true);
 
+        jButton_search1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton_search1.setText("تقرير");
+        jButton_search1.addActionListener(this::jButton_search1ActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -157,16 +163,16 @@ public class Member_List_info extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel_fullName)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel_gender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel_Email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel_phon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jLabel_phon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButton_search1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel_image1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                                .addComponent(jLabel_fullName, javax.swing.GroupLayout.Alignment.TRAILING)))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -192,7 +198,7 @@ public class Member_List_info extends javax.swing.JFrame {
                             .addComponent(jTextField_search, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_search))
                         .addGap(32, 32, 32)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
@@ -205,7 +211,9 @@ public class Member_List_info extends javax.swing.JFrame {
                         .addComponent(jLabel_Email)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel_gender)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jButton_search1)
+                        .addGap(42, 42, 42))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,7 +224,7 @@ public class Member_List_info extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -276,40 +284,78 @@ public class Member_List_info extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_searchActionPerformed
 
     private void jTable_Members_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Members_MouseClicked
-    
-        Member selectMember;
     try {
-
-          Integer rowIndex = jTable_Members_.getSelectedRow();
-
-     
-
-        int id = Integer.parseInt( jTable_Members_.getModel().getValueAt(rowIndex, 0) .toString());
-
-         selectMember = member.getMemberByID(id);
-
-        if (selectMember != null) {
-
-            jLabel_fullName.setText(selectMember.getFirstName() + " " +  selectMember.getLastName());
-             jLabel_phon.setText(selectMember.getPhone());
-            jLabel_Email.setText(selectMember.getEmail());
-            jLabel_gender.setText(selectMember.getGender());
-
-            byte[] image = selectMember.getPhoto();
-
-            func.displayImage(200, 150, image, "", jLabel_image1);
-
-        } else {
-
-            JOptionPane.showMessageDialog(null,"Member not found", "Error", 0);
+        // 1. استدعاء ملف التصميم المحدث jrxml بدلاً من jasper
+        java.io.InputStream reportStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("MEMBER_REPORT.jrxml");
+        if (reportStream == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "لم يتم العثور على ملف تصميم التقرير (jrxml)!");
+            return;
         }
 
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(null,  "Error: " + ex.getMessage(), "Exception",0);
+        // 2. عمل Compile للملف برمجياً ليأخذ آخر التعديلات فوراً
+        net.sf.jasperreports.engine.JasperReport jasperReport = net.sf.jasperreports.engine.JasperCompileManager.compileReport(reportStream);
+
+        // 3. الباراميترز
+        java.util.HashMap<String, Object> parameters = new java.util.HashMap<>();
+        
+        // 4. تعبئة التقرير بالبيانات باستخدام الـ jasperReport الجديد
+        net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(jasperReport, parameters, DB.getConnection());
+
+        // 5. عرض التقرير
+        net.sf.jasperreports.view.JasperViewer viewer = new net.sf.jasperreports.view.JasperViewer(jasperPrint, false);
+        viewer.setTitle("قائمة الاعضاء");
+        viewer.setVisible(true);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(this, "خطأ أثناء عرض التقرير: " + e.getMessage());
     }
 
-     
     }//GEN-LAST:event_jTable_Members_MouseClicked
+
+    private void jButton_search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_search1ActionPerformed
+    try {
+        // 1. طباعة مسار المجلد الحالي للمشروع لتعرفي أين يبحث الجافا
+        String currentDir = new java.io.File(".").getAbsolutePath();
+        System.out.println("المسار الحالي للمشروع هو: " + currentDir);
+        
+        // 2. محاولة القراءة من المجلد الرئيسي للمشروع مباشرة كحل بديل ومضمون
+        java.io.File reportFile = new java.io.File("MEMBER_REPORT.jrxml");
+        
+        // إذا لم يجده في المجلد الرئيسي، نجرب مجلد الـ src
+        if (!reportFile.exists()) {
+            reportFile = new java.io.File("src/main/resources/MEMBER_REPORT.jrxml");
+        }
+        
+        // إذا لم يجده أيضاً، سنظهر رسالة بالمسار الذي بحث فيه لنتأكد
+        if (!reportFile.exists()) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "لم يجد الملف في المسار: \n" + reportFile.getAbsolutePath());
+            return;
+        }
+
+        // 3. قراءة الملف بعدما عثرنا عليه بالتأكيد
+        java.io.InputStream reportStream = new java.io.FileInputStream(reportFile);
+
+        // 4. عمل Compile للملف برمجياً
+        net.sf.jasperreports.engine.JasperReport jasperReport = net.sf.jasperreports.engine.JasperCompileManager.compileReport(reportStream);
+
+        // 5. الباراميترز والـ Fill
+        java.util.HashMap<String, Object> parameters = new java.util.HashMap<>();
+        net.sf.jasperreports.engine.JasperPrint jasperPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(jasperReport, parameters, DB.getConnection());
+
+        // 6. عرض التقرير
+        net.sf.jasperreports.view.JasperViewer viewer = new net.sf.jasperreports.view.JasperViewer(jasperPrint, false);
+        viewer.setTitle("قائمة الاعضاء");
+        viewer.setVisible(true);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(this, "خطأ أثناء عرض التقرير: " + e.getMessage());
+    
+       
+}
+    }//GEN-LAST:event_jButton_search1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,6 +385,7 @@ public class Member_List_info extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_search;
+    private javax.swing.JButton jButton_search1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

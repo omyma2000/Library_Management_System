@@ -170,15 +170,16 @@ public class ReturnBookForm11 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox_Status, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel7))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jComboBox_Status, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel7))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(97, 97, 97)
-                                .addComponent(jButton_Return, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(88, 88, 88)
+                                .addComponent(jButton_Return, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel_FullName, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,13 +328,13 @@ public class ReturnBookForm11 extends javax.swing.JFrame {
         // TODO add your handling code here:
         
        String status = jComboBox_Status.getSelectedItem().toString();
-       if (status.equals("All")){
+       if (status.equals("الكل")){
        status = "";
        }
-      else if(status.equals("Return")||status.equalsIgnoreCase("Returned"))
+      else if(status.equals("المستردة"))
                {
                status = "returned" ;
-               }else if (status.equalsIgnoreCase("Issued")){
+               }else if (status.equalsIgnoreCase("المستعارة")){
                status = "issued";
                }
         populatJtablewithissuedBook(status);
@@ -364,7 +365,7 @@ public void populatJtablewithissuedBook(String _status) {
     ArrayList<Library_Business.Issue_Book> issBooksList = issue_Book.issuedbooksList(_status);
     
     // أسماء الأعمدة
-    String[] colNames = {"Book ID", "Member ID", "Status", "Issued Date", "Return Date", "Note"};
+    String[] colNames = {" ID للكتب", "ID للعضو", "حالة الكتاب", "تاريخ الاستعارة", "تاريخ الارجاع", "ملاحظات"};
     
     // إنشاء المصفوفة بناءً على حجم البيانات المسترجعة
     Object[][] rows = new Object[issBooksList.size()][colNames.length];

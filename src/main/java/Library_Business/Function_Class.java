@@ -17,60 +17,62 @@ import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Function_Class extends BaseUI_Service{
-    //costomize function 
+    //customize function 
     @Override
-    public  void customizeTable(JTable table, Color backColor, Color fgColor){
-    super.customizeTable(table, backColor, fgColor);
-    //[217,203,203]  Gray 
-     table.setShowHorizontalLines(true);
-       table.setGridColor(Color.yellow);
+    public void customizeTable(JTable table, Color backColor, Color fgColor){
+        super.customizeTable(table, backColor, fgColor);
+        table.setShowHorizontalLines(true);
+        table.setGridColor(Color.yellow);
     }
     
-     // image display function in jLabel1
-   public void displayImage(int width, int height, byte[] imagebyte, String imagePath, JLabel label) {
+    // image display function in jLabel1
+    public void displayImage(int width, int height, byte[] imagebyte, String imagePath, JLabel label) {
+        try {
+            ImageIcon imageIcon = null;
 
-    try {
-        ImageIcon imageIcon;
+            // 1. التحقق أولاً من مصفوفة البايتات (القادمة من قاعدة البيانات)
+            if (imagebyte != null && imagebyte.length > 0) {
+                imageIcon = new ImageIcon(imagebyte);
+            } 
+            // 2. التحقق من المسار النصي مع إزالة أي مسافات زائدة باستخدام trim()
+            else if (imagePath != null && !imagePath.trim().isEmpty()) {
+                File file = new File(imagePath.trim());
+                if (file.exists()) {
+                    imageIcon = new ImageIcon(imagePath.trim());
+                } else {
+                    System.out.println("المسار غير موجود على الجهاز: " + imagePath);
+                    label.setIcon(null); // تنظيف الجرافيك لو المسار غلط
+                    return;
+                }
+            } 
+            // 3. إذا لم يتوفر أي منهما
+            else {
+                System.out.println("No image provided!");
+                label.setIcon(null); // إزالة الصورة القديمة من الـ JLabel
+                return;
+            }
 
-        if (imagebyte != null && imagebyte.length > 0) {
+            // تغيير حجم الصورة ليتلاءم مع حجم الـ JLabel
+            Image image = imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            label.setIcon(new ImageIcon(image));
 
-            imageIcon = new ImageIcon(imagebyte);
-
-        } else if (imagePath != null && !imagePath.isEmpty()) {
-
-            imageIcon = new ImageIcon(imagePath);
-
-        } else {
-
-            System.out.println("No image provided!");
-            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error loading image");
         }
-
-        Image image = imageIcon.getImage()
-                .getScaledInstance(width, height, Image.SCALE_SMOOTH);
-
-        label.setIcon(new ImageIcon(image));
-
-    } catch (Exception e) {
-
-        e.printStackTrace();
-        System.out.println("Error loading image");
     }
-}
    
-    
-          // customize Header table 
-        public void customizeHeaderTable(JTable table, Color back_Color , Integer fontSize){
-          // customize the header table row
+    // customize Header table 
+    public void customizeHeaderTable(JTable table, Color back_Color , Integer fontSize){
         table.getTableHeader().setBackground(back_Color);
         table.getTableHeader().setForeground(Color.white);
         table.getTableHeader().setFont(new Font("Verdana",Font.BOLD,fontSize));
-        table.getTableHeader().setOpaque(false); // نقدر نكبر ونصغر الاعمدة ف الجدول 
-         }
-        //create function to select image 
-        //return image path
-        public String selectImage()
-        {
+        table.getTableHeader().setOpaque(false); 
+    }
+        
+    //create function to select image 
+    //return image path
+    public String selectImage() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Select Profile Picture");
         fileChooser.setCurrentDirectory(new File("C:\\Users\\LCS\\OneDrive\\الصور"));
@@ -78,46 +80,42 @@ public class Function_Class extends BaseUI_Service{
         FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Image Files", "png", "jpg", "jpeg");
         fileChooser.addChoosableFileFilter(extensionFilter);
         
-        int fileState = fileChooser.showOpenDialog(null); // تم تعديلها لفتح وليس حفظ
-         String path= " ";
-        if (fileState == JFileChooser.APPROVE_OPTION) {
-            
-                 path = fileChooser.getSelectedFile().getAbsolutePath();
-              }
-            return path ;
-        }
+        int fileState = fileChooser.showOpenDialog(null); 
         
-    
-    
+        String path = ""; // تم تعديلها هنا من " " إلى "" لمنع تخزين مسافات خاطئة
+        
+        if (fileState == JFileChooser.APPROVE_OPTION) {
+            path = fileChooser.getSelectedFile().getAbsolutePath();
+        }
+        return path;
+    }
+        
     // return resultSet function 
     public ResultSet getData(String query ){
-   // String selectQuery = "SELECT *FROM 'author'";
         PreparedStatement ps;
         ResultSet rs = null ;
         try {
-            ps=DB.getConnection().prepareStatement(query);
+            ps = DB.getConnection().prepareStatement(query);
             rs = ps.executeQuery();
-        } catch (SQLException ex) {
+            } catch (SQLException ex) {
             Logger.getLogger(Function_Class.class.getName()).log(Level.SEVERE,null,ex);
         }
+        return rs;
+    }
     
-    return rs;
-    }
-    public  int countData(String tableName){
-    int total = 0 ;
-    ResultSet rs;
-    Statement st;
-       try {
-        st = DB.getConnection().createStatement();
-        rs = st.executeQuery("SELECT COUNT(*) as total FROM "+tableName);
-        if (rs.next()) {
-            total = rs.getInt("total");
+    public int countData(String tableName){
+        int total = 0 ;
+        ResultSet rs;
+        Statement st;
+        try {
+            st = DB.getConnection().createStatement();
+            rs = st.executeQuery("SELECT COUNT(*) as total FROM "+tableName);
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Function_Class.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       } catch (SQLException ex) {
-           System.getLogger(Function_Class.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-       }
-    return  total;
+        return total;
     }
-  
 }

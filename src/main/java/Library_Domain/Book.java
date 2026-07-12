@@ -404,33 +404,45 @@ public boolean isbnExistsForOtherBook(String isbn, int id)
 }
     // ================= GET MEMBER BY ID =================
     // تم إضافة throws SQLException لكي يراها الـ try-catch في الواجهات الخارجية
+ // ================= GET BOOK BY ID =================
  public Book getBookByID(int _id) throws SQLException {
-
-    Function_Class function_Class = new Function_Class();
-    String query = "SELECT * FROM books WHERE id = " + _id;
-
-    ResultSet rs = function_Class.getData(query);
-
-    if (rs.next()) {
-
-        return new Book(
-            rs.getInt("id"),
-            rs.getString("isbn"),
-            rs.getString("name"),
-            rs.getInt("author_id"),
-            rs.getInt("genre_id"),
-            rs.getInt("quantity"),
-            rs.getString("publisher"),
-            rs.getString("date_revived"), // أو date_received حسب اسم العمود عندك
-            rs.getDouble("price"),
-            rs.getString("description"),
-            rs.getBytes("cover_image")
-        );
-
-    } else {
-        return null;
+    
+    // تأكدي من استخدام كائن الـ Connection المفتوح عبر الـ Singleton المجهز بكلاس DB
+    java.sql.Connection con = Library_Data.DB.getConnection();
+    
+    // استخدام PreparedStatement لحماية الاستعلام وجلب الأعمدة بأسمائها الصريحة
+    String query = "SELECT id, isbn, name, author_id, genre_id, quantity, publisher, date_revived, price, description, cover_image FROM books WHERE id = ?";
+    
+    try (PreparedStatement ps = con.prepareStatement(query)) {
+        ps.setInt(1, _id);
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return new Book(
+                    rs.getInt("id"),
+                    rs.getString("isbn"),
+                    rs.getString("name"),
+                    rs.getInt("author_id"),
+                    rs.getInt("genre_id"),
+                    rs.getInt("quantity"),
+                    rs.getString("publisher"),
+                    rs.getString("date_revived"), 
+                    rs.getDouble("price"),
+                    rs.getString("description"),
+                    rs.getBytes("cover_image")
+                );
+            }
+        }
+    } catch (SQLException ex) {
+        java.util.logging.Logger.getLogger(Book.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        throw ex; // تمرير الخطأ ليتم طباعته في الـ catch الخاصة بالواجهة
     }
-}
+    
+    return null; // إذا لم يجد الكتاب
+ }
+  
+  
+  
  // function to display latest book added 
  public  void displayBooksCover(JLabel[] labels_tab){ // as array
     ResultSet rs;
